@@ -2,11 +2,13 @@ package com.path_find.entities.Inetrface;
 
 import com.path_find.entities.*;
 
+/**
+ * Interface representing a node of a graph
+ */
 public interface Node {
-    public Node[] GetNeighbors();
-    public int GetRouteWeigth(Node target);
-    public String GetName();
-    public Point2D GetPoint2D();
-    public boolean CheckIfPassable();
-    public int GetEvristicDistance(Node target);
+    Point2D GetPoint();
+    void SetPoint(Point2D point);
+    Edge[] GetEdges();
+    void SetEdges(Edge[] edges);
+    boolean TryAddEdge(Edge edge);
 }
