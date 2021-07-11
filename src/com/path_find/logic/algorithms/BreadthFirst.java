@@ -62,7 +62,13 @@ public class BreadthFirst implements PathFinderAlgorithm {
 
     @Override
     public Edge[] GetEdgesInPath() {
-        return new Edge[0];
+        List<Edge> edges = new ArrayList<>();
+        Route currentRoute = finish;
+        while (currentRoute != null) {
+            edges.add(currentRoute);
+            currentRoute = currentRoute.GetParent();
+        }
+        return  edges.toArray(new Edge[0]);
     }
 
     @Override
