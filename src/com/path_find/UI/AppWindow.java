@@ -4,7 +4,7 @@ import com.path_find.UI.components.FieldDrawComponent;
 import com.path_find.UI.components.FieldListener;
 import com.path_find.entities.Inetrface.Node;
 import com.path_find.entities.Point2D;
-import com.path_find.entities.SquareField;
+import com.path_find.entities.Inetrface.square.SquareField;
 import com.path_find.logic.algorithms.BreadthFirst;
 import com.path_find.logic.interfaces.PathFinderAlgorithm;
 
@@ -33,9 +33,9 @@ public class AppWindow extends JFrame {
         panel.add(mainPanel, BorderLayout.CENTER);
         mainPanel.add(fieldDraw);
         fieldDraw.setAlignmentX(Component.CENTER_ALIGNMENT);
-        JButton repaintButton = new JButton("Repaint");
-        repaintButton.addActionListener(new RepaintButtonEventListener(this));
-        panel.add(repaintButton, BorderLayout.PAGE_END);
+        JButton findButton = new JButton("FIND PATH");
+        findButton.addActionListener(new FindButtonEventListener(this));
+        panel.add(findButton, BorderLayout.PAGE_END);
         fieldDraw.setBackground(new Color(60,60,60));
         fieldDraw.addMouseListener(listener);
         fieldDraw.SetUnPassed(field.GetWallMap());
@@ -63,10 +63,10 @@ public class AppWindow extends JFrame {
     }
 }
 
-class RepaintButtonEventListener implements ActionListener {
+class FindButtonEventListener implements ActionListener {
     private AppWindow _app;
 
-    public RepaintButtonEventListener(AppWindow app) {
+    public FindButtonEventListener(AppWindow app) {
         _app = app;
     }
     public void actionPerformed (ActionEvent e) {

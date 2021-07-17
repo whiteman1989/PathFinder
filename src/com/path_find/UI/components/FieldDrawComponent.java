@@ -15,6 +15,8 @@ public class FieldDrawComponent extends JPanel {
     private Node[] _way;
 
     public FieldDrawComponent () {
+        setMaximumSize(new Dimension(201,201));
+        setMaximumSize(new Dimension(201,201));
         setPreferredSize(new Dimension(201,201));
     }
 
