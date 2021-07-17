@@ -1,14 +1,15 @@
 package com.path_find.UI.components;
 
+import com.path_find.UI.AppWindow;
 import com.path_find.UI.components.FieldDrawComponent;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class FieldListener implements MouseListener {
-    private FieldDrawComponent _field;
-    public FieldListener(FieldDrawComponent field) {
-        _field = field;
+    private AppWindow _app;
+    public FieldListener(AppWindow app) {
+        _app = app;
     }
 
     @Override
@@ -16,7 +17,7 @@ public class FieldListener implements MouseListener {
         int x = (int)e.getX();
         int y = (int)e.getY();
         System.out.println("x:"+x+" y:"+y);
-        _field.AddWall(y,x);
+        _app.ClickOnField(x,y);
     }
 
     @Override

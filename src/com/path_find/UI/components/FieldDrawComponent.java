@@ -1,7 +1,10 @@
 package com.path_find.UI.components;
 
+import com.path_find.entities.Inetrface.Node;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,15 +12,14 @@ import java.util.List;
 public class FieldDrawComponent extends JPanel {
     private int cellSize = 20;
     private boolean[][] unPassed = new boolean[10][10];
-    private boolean[][] theWay = new boolean[10][10];
-    private FieldListener listener;
+    private Node[] _way;
 
     public FieldDrawComponent () {
-        listener = new FieldListener(this);
+        setPreferredSize(new Dimension(201,201));
     }
 
-    public void AddPathPoint(int x, int y) {
-
+    public void SetPath(Node[] way) {
+        _way = way;
     }
 
     public void AddWall(int x, int y) {
@@ -32,10 +34,8 @@ public class FieldDrawComponent extends JPanel {
         for (int i = 0; i < 10; i++) {
             for (int j = 0; j < 10; j++) {
                 Rectangle2D rectangle = new Rectangle2D.Double(j * cellSize, i * cellSize, cellSize, cellSize);
-                if (i % 2 == 0 ^ j % 2 == 0) {
-                    g2.setPaint(Color.CYAN);
-                    g2.fill(rectangle);
-                }
+                g2.setPaint(Color.CYAN);
+                g2.fill(rectangle);
                 if (unPassed[i][j]) {
                     g2.setPaint(Color.black);
                     g2.fill(rectangle);
@@ -44,13 +44,20 @@ public class FieldDrawComponent extends JPanel {
                 g2.draw(rectangle);
             }
         }
+        if(_way != null) {
+            for (Node n : _way) {
+                g2.setColor(Color.GREEN);
+                Ellipse2D ellipse = new Ellipse2D.Double(n.GetPoint().x * cellSize, n.GetPoint().y * cellSize, cellSize, cellSize);
+                g2.fill(ellipse);
+            }
+        }
     }
 
     public void SetUnPassed(boolean[][] unPassed) {
         this.unPassed = unPassed;
     }
 
-    public void SetTheWay(boolean[][] theWay) {
-        this.theWay = theWay;
+    public void SetTheWay(Node[] theWay) {
+        this._way = theWay;
     }
 }

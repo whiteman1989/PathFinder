@@ -22,7 +22,7 @@ public class BreadthFirst implements PathFinderAlgorithm {
     private List<Route> closeList;
     private Route finish;
 
-    BreadthFirst(Node startNode, Node endNode) {
+    public BreadthFirst(Node startNode, Node endNode) {
         _startNode = startNode;
         _endNode = endNode;
         openList = new ArrayDeque<>();
@@ -77,11 +77,12 @@ public class BreadthFirst implements PathFinderAlgorithm {
         Route currentRoute;
         while ((currentRoute = openList.poll()) != null) {
             if(currentRoute.GetTarget() == _endNode) {
+                finish = currentRoute;
                 return true;
             }
             Edge[] edges = currentRoute.GetTarget().GetEdges();
             for (Edge e : edges) {
-                TryAddToOpenList(new Route(e, currentRoute));
+                TryAddToOpenList(new Route(e.GetTarget(), currentRoute));
             }
             closeList.add(currentRoute);
         }
