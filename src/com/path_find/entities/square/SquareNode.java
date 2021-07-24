@@ -4,11 +4,10 @@ import com.path_find.entities.Inetrface.Edge;
 import com.path_find.entities.Inetrface.Node;
 import com.path_find.entities.Point2D;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class SquareNode implements Node, Serializable {
+public class SquareNode implements Node{
     private SquareField _field;
     private Point2D _point;
     List<Edge> _edges;

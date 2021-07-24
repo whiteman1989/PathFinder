@@ -3,8 +3,6 @@ package com.path_find.entities.square;
 import com.path_find.entities.Inetrface.Edge;
 import com.path_find.entities.Inetrface.Node;
 
-import java.io.Serializable;
-
 public class Arch implements Edge {
     private Node _target;
 

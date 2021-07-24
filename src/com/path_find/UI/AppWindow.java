@@ -27,6 +27,7 @@ public class AppWindow extends JFrame {
     SquareField field;
     Node startNode;
     Node finishNode;
+    String message = "It is not possible to build a path. The points are isolated!";
 
 
     public AppWindow() {
@@ -70,10 +71,13 @@ public class AppWindow extends JFrame {
 
     public void FinPath() {
         PathFinderAlgorithm algorithm = new  BreadthFirst(startNode, finishNode);
-        algorithm.Execute();
-        Node[] path = algorithm.GetNodesInPath();
-        fieldDraw.SetTheWay(path);
-        Repaint();
+        if(algorithm.Execute()) {
+            Node[] path = algorithm.GetNodesInPath();
+            fieldDraw.SetTheWay(path);
+            Repaint();
+        } else {
+            JOptionPane.showMessageDialog(null, message, "Output", JOptionPane.PLAIN_MESSAGE);
+        }
     }
 
     public void ClearField() {
