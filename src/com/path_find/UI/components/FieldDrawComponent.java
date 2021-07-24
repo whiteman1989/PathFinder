@@ -24,9 +24,10 @@ public class FieldDrawComponent extends JPanel {
         _height = height;
         _width = width;
         _cellSize = cellSize;
-        setMaximumSize(new Dimension(201,201));
-        setMaximumSize(new Dimension(201,201));
-        setPreferredSize(new Dimension(201,201));
+        Dimension dimension = new Dimension(_width*_cellSize+1,_height*cellSize+1 );
+        setMaximumSize(dimension);
+        setMaximumSize(dimension);
+        setPreferredSize(dimension);
         unPassed = new boolean[_height][_width];
     }
 

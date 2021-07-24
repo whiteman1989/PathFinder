@@ -4,8 +4,8 @@ import com.path_find.entities.Inetrface.Node;
 import com.path_find.entities.Point2D;
 
 public class SquareField {
-    private int _height = 10;
-    private int _width = 10;
+    private int _height;
+    private int _width;
     private SquareNode[][] nodes;
 
     public SquareField() {
@@ -37,7 +37,7 @@ public class SquareField {
         }
     }
 
-    public int GetHeigth() {
+    public int GetHeight() {
         return _height;
     }
 
@@ -54,18 +54,12 @@ public class SquareField {
         for (int i = 0; i < _height; i++) {
             for (int j = 0; j < _width; j++) {
                 map[i][j] = nodes[i][j].isWall;
-                if (nodes[i][j].isWall) {
-                    System.out.print("1");
-                } else {
-                    System.out.print("0");
-                }
             }
-            System.out.println();
         }
         return map;
     }
 
-    public boolean TogleWall(Point2D point) {
+    public boolean ToggleWall(Point2D point) {
         return nodes[point.y][point.x].isWall = !nodes[point.y][point.x].isWall;
     }
 }

@@ -14,15 +14,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class AppWindow extends JFrame {
+    private int _width = 20;
+    private int _height = 20;
     JPanel panel = new JPanel();
-    FieldDrawComponent fieldDraw = new FieldDrawComponent();
+    FieldDrawComponent fieldDraw = new FieldDrawComponent(_height, _width, 20);
     FieldListener listener = new FieldListener(this);
     SquareField field;
-    PathFinderAlgorithm algorithm;
 
 
     public AppWindow() {
-        field = new SquareField();
+        field = new SquareField(_height, _width);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container container = getContentPane();
         this.setBounds(100, 100, 250, 400);
@@ -60,7 +61,7 @@ public class AppWindow extends JFrame {
     }
 
     public void ClickOnField(int x, int y) {
-        field.TogleWall(new Point2D(x/20,y/20));
+        field.ToggleWall(new Point2D(x/20,y/20));
         fieldDraw.SetUnPassed(field.GetWallMap());
         Repaint();
     }

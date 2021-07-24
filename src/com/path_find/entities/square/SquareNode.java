@@ -21,7 +21,7 @@ public class SquareNode implements Node {
     }
 
     private boolean AddEdge(Point2D point) {
-        if(point.x < _field.GetWidth() && point.y < _field.GetHeigth() && point.x >= 0 && point.y >= 0) {
+        if(point.x < _field.GetWidth() && point.y < _field.GetHeight() && point.x >= 0 && point.y >= 0) {
             _edges.add(new Arch((SquareNode) _field.GetNode(point)));
             return true;
         } else {

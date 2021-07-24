@@ -1,7 +1,6 @@
 package com.path_find.UI.components;
 
 import com.path_find.UI.AppWindow;
-import com.path_find.UI.components.FieldDrawComponent;
 
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -14,9 +13,8 @@ public class FieldListener implements MouseListener {
 
     @Override
     public void mouseClicked(MouseEvent e) {
-        int x = (int)e.getX();
-        int y = (int)e.getY();
-        System.out.println("x:"+x+" y:"+y);
+        int x = e.getX();
+        int y = e.getY();
         _app.ClickOnField(x,y);
     }
 
