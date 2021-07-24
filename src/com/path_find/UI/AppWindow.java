@@ -1,5 +1,6 @@
 package com.path_find.UI;
 
+import com.path_find.UI.components.DownButtonsPanel;
 import com.path_find.UI.components.FieldDrawComponent;
 import com.path_find.UI.components.FieldListener;
 import com.path_find.entities.Inetrface.Node;
@@ -34,16 +35,14 @@ public class AppWindow extends JFrame {
         panel.add(mainPanel, BorderLayout.CENTER);
         mainPanel.add(fieldDraw);
         fieldDraw.setAlignmentX(Component.CENTER_ALIGNMENT);
-        JButton findButton = new JButton("FIND PATH");
-        findButton.addActionListener(new FindButtonEventListener(this));
-        panel.add(findButton, BorderLayout.PAGE_END);
-        JButton clearButton =  new JButton("CLEAR FIELD");
-        clearButton.addActionListener(new ClearButtonEventListener(this));
-        //panel.add(clearButton, BorderLayout.PAGE_END);
+        DownButtonsPanel downButtonsPanel = new DownButtonsPanel();
+        downButtonsPanel.findButton.addActionListener(new FindButtonEventListener(this));
+        panel.add(downButtonsPanel, BorderLayout.PAGE_END);
         fieldDraw.setBackground(new Color(60,60,60));
         fieldDraw.addMouseListener(listener);
         fieldDraw.SetUnPassed(field.GetWallMap());
         this.setVisible(true);
+        this.pack();
     }
 
     public void Repaint() {
