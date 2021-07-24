@@ -36,6 +36,9 @@ public class AppWindow extends JFrame {
         JButton findButton = new JButton("FIND PATH");
         findButton.addActionListener(new FindButtonEventListener(this));
         panel.add(findButton, BorderLayout.PAGE_END);
+        JButton clearButton =  new JButton("CLEAR FIELD");
+        clearButton.addActionListener(new ClearButtonEventListener(this));
+        //panel.add(clearButton, BorderLayout.PAGE_END);
         fieldDraw.setBackground(new Color(60,60,60));
         fieldDraw.addMouseListener(listener);
         fieldDraw.SetUnPassed(field.GetWallMap());
@@ -69,7 +72,16 @@ class FindButtonEventListener implements ActionListener {
     public FindButtonEventListener(AppWindow app) {
         _app = app;
     }
+    @Override
     public void actionPerformed (ActionEvent e) {
         _app.FinPath();
     }
+}
+
+class ClearButtonEventListener implements ActionListener {
+    private AppWindow _app;
+
+    public ClearButtonEventListener(AppWindow app) {_app = app;}
+    @Override
+    public void actionPerformed(ActionEvent e) { }
 }

@@ -10,14 +10,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class FieldDrawComponent extends JPanel {
-    private int cellSize = 20;
-    private boolean[][] unPassed = new boolean[10][10];
+    private int _height;
+    private int _width;
+    private int _cellSize;
+    private boolean[][] unPassed;
     private Node[] _way;
 
-    public FieldDrawComponent () {
+    public FieldDrawComponent() {
+        this(10, 10, 20);
+    }
+
+    public FieldDrawComponent (int height, int width, int cellSize) {
+        _height = height;
+        _width = width;
+        _cellSize = cellSize;
         setMaximumSize(new Dimension(201,201));
         setMaximumSize(new Dimension(201,201));
         setPreferredSize(new Dimension(201,201));
+        unPassed = new boolean[_height][_width];
     }
 
     public void SetPath(Node[] way) {
@@ -32,10 +42,9 @@ public class FieldDrawComponent extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         Graphics2D g2 = (Graphics2D) g;
-        List<Rectangle2D> rectangleS = new ArrayList<Rectangle2D>();
-        for (int i = 0; i < 10; i++) {
-            for (int j = 0; j < 10; j++) {
-                Rectangle2D rectangle = new Rectangle2D.Double(j * cellSize, i * cellSize, cellSize, cellSize);
+        for (int i = 0; i < _height; i++) {
+            for (int j = 0; j < _width; j++) {
+                Rectangle2D rectangle = new Rectangle2D.Double(j * _cellSize, i * _cellSize, _cellSize, _cellSize);
                 g2.setPaint(Color.CYAN);
                 g2.fill(rectangle);
                 if (unPassed[i][j]) {
@@ -49,7 +58,7 @@ public class FieldDrawComponent extends JPanel {
         if(_way != null) {
             for (Node n : _way) {
                 g2.setColor(Color.GREEN);
-                Ellipse2D ellipse = new Ellipse2D.Double(n.GetPoint().x * cellSize, n.GetPoint().y * cellSize, cellSize, cellSize);
+                Ellipse2D ellipse = new Ellipse2D.Double(n.GetPoint().x * _cellSize, n.GetPoint().y * _cellSize, _cellSize, _cellSize);
                 g2.fill(ellipse);
             }
         }
