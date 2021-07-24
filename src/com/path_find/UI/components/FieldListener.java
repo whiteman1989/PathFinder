@@ -15,7 +15,9 @@ public class FieldListener implements MouseListener {
     public void mouseClicked(MouseEvent e) {
         int x = e.getX();
         int y = e.getY();
-        _app.ClickOnField(x,y);
+        if(e.getButton() == MouseEvent.BUTTON1) {
+            _app.ClickOnField(x,y);
+        }
     }
 
     @Override

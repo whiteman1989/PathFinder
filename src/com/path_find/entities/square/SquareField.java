@@ -62,4 +62,12 @@ public class SquareField {
     public boolean ToggleWall(Point2D point) {
         return nodes[point.y][point.x].isWall = !nodes[point.y][point.x].isWall;
     }
+
+    public void ClearField() {
+        for (int i = 0; i < _height; i++) {
+            for (int j = 0; j < _width; j++) {
+                nodes[i][j].isWall = false;
+            }
+        }
+    }
 }

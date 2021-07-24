@@ -17,8 +17,9 @@ import java.awt.event.ActionListener;
 public class AppWindow extends JFrame {
     private int _width = 20;
     private int _height = 20;
+    private int  _cellSize = 20;
     JPanel panel = new JPanel();
-    FieldDrawComponent fieldDraw = new FieldDrawComponent(_height, _width, 20);
+    FieldDrawComponent fieldDraw = new FieldDrawComponent(_height, _width, _cellSize);
     FieldListener listener = new FieldListener(this);
     SquareField field;
 
@@ -37,6 +38,7 @@ public class AppWindow extends JFrame {
         fieldDraw.setAlignmentX(Component.CENTER_ALIGNMENT);
         DownButtonsPanel downButtonsPanel = new DownButtonsPanel();
         downButtonsPanel.findButton.addActionListener(new FindButtonEventListener(this));
+        downButtonsPanel.clearButton.addActionListener(new ClearButtonEventListener(this));
         panel.add(downButtonsPanel, BorderLayout.PAGE_END);
         fieldDraw.setBackground(new Color(60,60,60));
         fieldDraw.addMouseListener(listener);
@@ -59,10 +61,20 @@ public class AppWindow extends JFrame {
         Repaint();
     }
 
-    public void ClickOnField(int x, int y) {
-        field.ToggleWall(new Point2D(x/20,y/20));
+    public void ClearField() {
+        field.ClearField();
         fieldDraw.SetUnPassed(field.GetWallMap());
         Repaint();
+    }
+
+    public void ClickOnField(int x, int y) {
+        field.ToggleWall(new Point2D(x/_cellSize,y/_cellSize));
+        fieldDraw.SetUnPassed(field.GetWallMap());
+        Repaint();
+    }
+
+    public void RightClickOnField(int x, int y) {
+
     }
 }
 
@@ -83,5 +95,7 @@ class ClearButtonEventListener implements ActionListener {
 
     public ClearButtonEventListener(AppWindow app) {_app = app;}
     @Override
-    public void actionPerformed(ActionEvent e) { }
+    public void actionPerformed(ActionEvent e) {
+        _app.ClearField();
+    }
 }
