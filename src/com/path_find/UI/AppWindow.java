@@ -29,6 +29,7 @@ public class AppWindow extends JFrame {
 
 
     public AppWindow() {
+        super("Path finder PPZ-41");
         field = new SquareField(_height, _width);
         startNode = field.GetNode(new Point2D(0,0));
         finishNode = field.GetNode(new Point2D(_width-1, _height-1));

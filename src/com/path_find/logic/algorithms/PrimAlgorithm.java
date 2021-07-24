@@ -39,7 +39,7 @@ public class PrimAlgorithm {
                     frontiers.add( new int[]{x-1,y,x-2,y} );
                 if ( y >= 2 && map[x][y-2] == WALL )
                     frontiers.add( new int[]{x,y-1,x,y-2} );
-                if ( x < _width-2 && map[x+2][y] == WALL )
+                if ( x < _width-2&& map[x+2][y] == WALL )
                     frontiers.add( new int[]{x+1,y,x+2,y} );
                 if ( y < _height-2 && map[x][y+2] == WALL )
                     frontiers.add( new int[]{x,y+1,x,y+2} );
