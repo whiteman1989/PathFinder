@@ -1,4 +1,4 @@
-package com.path_find.entities.Inetrface.square;
+package com.path_find.entities.square;
 
 import com.path_find.entities.Inetrface.Edge;
 import com.path_find.entities.Inetrface.Node;

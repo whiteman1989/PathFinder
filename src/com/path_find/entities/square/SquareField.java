@@ -1,42 +1,48 @@
-package com.path_find.entities.Inetrface.square;
+package com.path_find.entities.square;
 
 import com.path_find.entities.Inetrface.Node;
 import com.path_find.entities.Point2D;
 
 public class SquareField {
-    private int height = 10;
-    private int width = 10;
+    private int _height = 10;
+    private int _width = 10;
     private SquareNode[][] nodes;
 
     public SquareField() {
-        nodes = new SquareNode[height][width];
+        this(10, 10);
+    }
+
+    public SquareField(int height, int width) {
+        _height = height;
+        _width = width;
+        nodes = new SquareNode[_height][_width];
         FillNodes();
         InitNodes();
 
     }
 
     private void FillNodes() {
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
+        for (int i = 0; i < _height; i++) {
+            for (int j = 0; j < _width; j++) {
                 nodes[i][j] = new SquareNode(new Point2D(j, i), this);
             }
         }
     }
 
     private void InitNodes() {
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
+        for (int i = 0; i < _height; i++) {
+            for (int j = 0; j < _width; j++) {
                 nodes[i][j].InitEdges();
             }
         }
     }
 
     public int GetHeigth() {
-        return height;
+        return _height;
     }
 
     public int GetWidth() {
-        return width;
+        return _width;
     }
 
     public Node GetNode(Point2D point) {
@@ -44,9 +50,9 @@ public class SquareField {
     }
 
     public boolean[][] GetWallMap() {
-        boolean[][] map = new boolean[height][width];
-        for (int i = 0; i < height; i++) {
-            for (int j = 0; j < width; j++) {
+        boolean[][] map = new boolean[_height][_width];
+        for (int i = 0; i < _height; i++) {
+            for (int j = 0; j < _width; j++) {
                 map[i][j] = nodes[i][j].isWall;
                 if (nodes[i][j].isWall) {
                     System.out.print("1");

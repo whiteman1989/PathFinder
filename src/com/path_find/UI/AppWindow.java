@@ -4,7 +4,7 @@ import com.path_find.UI.components.FieldDrawComponent;
 import com.path_find.UI.components.FieldListener;
 import com.path_find.entities.Inetrface.Node;
 import com.path_find.entities.Point2D;
-import com.path_find.entities.Inetrface.square.SquareField;
+import com.path_find.entities.square.SquareField;
 import com.path_find.logic.algorithms.BreadthFirst;
 import com.path_find.logic.interfaces.PathFinderAlgorithm;
 
