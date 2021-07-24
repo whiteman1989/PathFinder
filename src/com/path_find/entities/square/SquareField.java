@@ -22,7 +22,7 @@ public class SquareField {
         InitNodes();
     }
 
-    private void WallMapToNodes(boolean[][] walls) {
+    public void WallMapToNodes(boolean[][] walls) {
         for (int i = 0; i < _height; i++) {
             for (int j = 0; j < _width; j++) {
                 nodes[i][j].isWall = walls[i][j];

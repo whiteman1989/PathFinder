@@ -4,14 +4,12 @@ import com.path_find.UI.Components.DownButtonsPanel;
 import com.path_find.UI.Components.FieldDrawComponent;
 import com.path_find.UI.Components.FieldListener;
 import com.path_find.UI.Components.UpButtonsPanel;
-import com.path_find.UI.EventListeners.ClearButtonEventListener;
-import com.path_find.UI.EventListeners.FindButtonEventListener;
-import com.path_find.UI.EventListeners.LoadButtonEventListener;
-import com.path_find.UI.EventListeners.SaveButtonEventListener;
+import com.path_find.UI.EventListeners.*;
 import com.path_find.entities.Inetrface.Node;
 import com.path_find.entities.Point2D;
 import com.path_find.entities.square.SquareField;
 import com.path_find.logic.algorithms.BreadthFirst;
+import com.path_find.logic.algorithms.PrimAlgorithm;
 import com.path_find.logic.interfaces.PathFinderAlgorithm;
 
 import javax.swing.*;
@@ -48,6 +46,7 @@ public class AppWindow extends JFrame {
         DownButtonsPanel downButtonsPanel = new DownButtonsPanel();
         downButtonsPanel.findButton.addActionListener(new FindButtonEventListener(this));
         downButtonsPanel.clearButton.addActionListener(new ClearButtonEventListener(this));
+        downButtonsPanel.generateButton.addActionListener(new GenerateButtonEventListener(this));
         panel.add(downButtonsPanel, BorderLayout.PAGE_END);
         //init up panel
         UpButtonsPanel upPanel = new UpButtonsPanel();
@@ -108,6 +107,14 @@ public class AppWindow extends JFrame {
     public void Load() {
         field.DeserializeNodes();
         fieldDraw.SetUnPassed(field.GetWallMap());
+        Repaint();
+    }
+
+    public void Generate() {
+        PrimAlgorithm algorithm = new  PrimAlgorithm(_height, _width);
+        algorithm.Execute();
+        field.WallMapToNodes(algorithm.GetMap());
+        fieldDraw.SetUnPassed(algorithm.GetMap());
         Repaint();
     }
 
