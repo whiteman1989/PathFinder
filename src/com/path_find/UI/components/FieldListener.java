@@ -18,6 +18,10 @@ public class FieldListener implements MouseListener {
         if(e.getButton() == MouseEvent.BUTTON1) {
             _app.ClickOnField(x,y);
         }
+        if(e.getButton() == MouseEvent.BUTTON3) {
+            _app.RightClickOnField(x,y);
+        }
+        System.out.println("pressed |" + e.getButton() + "| mouse button");
     }
 
     @Override

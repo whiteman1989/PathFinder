@@ -15,6 +15,8 @@ public class FieldDrawComponent extends JPanel {
     private int _cellSize;
     private boolean[][] unPassed;
     private Node[] _way;
+    private Node start;
+    private Node finish;
 
     public FieldDrawComponent() {
         this(10, 10, 20);
@@ -29,15 +31,6 @@ public class FieldDrawComponent extends JPanel {
         setMaximumSize(dimension);
         setPreferredSize(dimension);
         unPassed = new boolean[_height][_width];
-    }
-
-    public void SetPath(Node[] way) {
-        _way = way;
-    }
-
-    public void AddWall(int x, int y) {
-        unPassed[x][y] = !unPassed[x][y];
-        repaint();
     }
 
     @Override
@@ -56,6 +49,19 @@ public class FieldDrawComponent extends JPanel {
                 g2.draw(rectangle);
             }
         }
+        // Draw start
+        if(start != null) {
+            Rectangle2D startPoint = new Rectangle2D.Double(start.GetPoint().x * _cellSize, start.GetPoint().y * _cellSize, _cellSize, _cellSize);
+            g2.setColor(Color.RED);
+            g2.fill(startPoint);
+        }
+        // Draw finish
+        if(finish != null) {
+            Rectangle2D startPoint = new Rectangle2D.Double(finish.GetPoint().x * _cellSize, finish.GetPoint().y * _cellSize, _cellSize, _cellSize);
+            g2.setColor(Color.RED);
+            g2.fill(startPoint);
+        }
+        // Draw path
         if(_way != null) {
             for (Node n : _way) {
                 g2.setColor(Color.GREEN);
@@ -71,5 +77,13 @@ public class FieldDrawComponent extends JPanel {
 
     public void SetTheWay(Node[] theWay) {
         this._way = theWay;
+    }
+
+    public void SetStart(Node node) {
+        start = node;
+    }
+
+    public void SetFinish(Node node) {
+        finish = node;
     }
 }

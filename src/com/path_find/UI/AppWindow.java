@@ -22,10 +22,14 @@ public class AppWindow extends JFrame {
     FieldDrawComponent fieldDraw = new FieldDrawComponent(_height, _width, _cellSize);
     FieldListener listener = new FieldListener(this);
     SquareField field;
+    Node startNode;
+    Node finishNode;
 
 
     public AppWindow() {
         field = new SquareField(_height, _width);
+        startNode = field.GetNode(new Point2D(0,0));
+        finishNode = field.GetNode(new Point2D(_width-1, _height-1));
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         Container container = getContentPane();
         this.setBounds(100, 100, 250, 400);
@@ -43,6 +47,8 @@ public class AppWindow extends JFrame {
         fieldDraw.setBackground(new Color(60,60,60));
         fieldDraw.addMouseListener(listener);
         fieldDraw.SetUnPassed(field.GetWallMap());
+        fieldDraw.SetStart(startNode);
+        fieldDraw.SetFinish(finishNode);
         this.setVisible(true);
         this.pack();
     }
@@ -53,8 +59,7 @@ public class AppWindow extends JFrame {
     }
 
     public void FinPath() {
-        PathFinderAlgorithm algorithm = new  BreadthFirst(field.GetNode(new Point2D(0,0)),
-                field.GetNode(new Point2D(9,9)));
+        PathFinderAlgorithm algorithm = new  BreadthFirst(startNode, finishNode);
         algorithm.Execute();
         Node[] path = algorithm.GetNodesInPath();
         fieldDraw.SetTheWay(path);
@@ -64,6 +69,7 @@ public class AppWindow extends JFrame {
     public void ClearField() {
         field.ClearField();
         fieldDraw.SetUnPassed(field.GetWallMap());
+        fieldDraw.SetTheWay(null);
         Repaint();
     }
 
@@ -74,7 +80,11 @@ public class AppWindow extends JFrame {
     }
 
     public void RightClickOnField(int x, int y) {
-
+        startNode = finishNode;
+        finishNode = field.GetNode(new Point2D( x/_cellSize, y/_cellSize));
+        fieldDraw.SetStart(startNode);
+        fieldDraw.SetFinish(finishNode);
+        Repaint();
     }
 }
 
