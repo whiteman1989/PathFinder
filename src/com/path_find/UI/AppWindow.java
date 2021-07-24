@@ -1,8 +1,13 @@
 package com.path_find.UI;
 
-import com.path_find.UI.components.DownButtonsPanel;
-import com.path_find.UI.components.FieldDrawComponent;
-import com.path_find.UI.components.FieldListener;
+import com.path_find.UI.Components.DownButtonsPanel;
+import com.path_find.UI.Components.FieldDrawComponent;
+import com.path_find.UI.Components.FieldListener;
+import com.path_find.UI.Components.UpButtonsPanel;
+import com.path_find.UI.EventListeners.ClearButtonEventListener;
+import com.path_find.UI.EventListeners.FindButtonEventListener;
+import com.path_find.UI.EventListeners.LoadButtonEventListener;
+import com.path_find.UI.EventListeners.SaveButtonEventListener;
 import com.path_find.entities.Inetrface.Node;
 import com.path_find.entities.Point2D;
 import com.path_find.entities.square.SquareField;
@@ -11,8 +16,6 @@ import com.path_find.logic.interfaces.PathFinderAlgorithm;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class AppWindow extends JFrame {
     private int _width = 20;
@@ -40,10 +43,16 @@ public class AppWindow extends JFrame {
         panel.add(mainPanel, BorderLayout.CENTER);
         mainPanel.add(fieldDraw);
         fieldDraw.setAlignmentX(Component.CENTER_ALIGNMENT);
+        // init down panel
         DownButtonsPanel downButtonsPanel = new DownButtonsPanel();
         downButtonsPanel.findButton.addActionListener(new FindButtonEventListener(this));
         downButtonsPanel.clearButton.addActionListener(new ClearButtonEventListener(this));
         panel.add(downButtonsPanel, BorderLayout.PAGE_END);
+        //init up panel
+        UpButtonsPanel upPanel = new UpButtonsPanel();
+        upPanel.saveButton.addActionListener(new SaveButtonEventListener(this));
+        upPanel.loadButton.addActionListener(new LoadButtonEventListener(this));
+        panel.add(upPanel, BorderLayout.PAGE_START);
         fieldDraw.setBackground(new Color(60,60,60));
         fieldDraw.addMouseListener(listener);
         fieldDraw.SetUnPassed(field.GetWallMap());
@@ -51,6 +60,7 @@ public class AppWindow extends JFrame {
         fieldDraw.SetFinish(finishNode);
         this.setVisible(true);
         this.pack();
+        this.setResizable(false);
     }
 
     public void Repaint() {
@@ -86,26 +96,17 @@ public class AppWindow extends JFrame {
         fieldDraw.SetFinish(finishNode);
         Repaint();
     }
+
+    public void Save() {
+        field.SerializeNodes();
+    }
+
+    public void Load() {
+        field.DeserializeNodes();
+        fieldDraw.SetUnPassed(field.GetWallMap());
+        Repaint();
+    }
+
+
 }
 
-class FindButtonEventListener implements ActionListener {
-    private AppWindow _app;
-
-    public FindButtonEventListener(AppWindow app) {
-        _app = app;
-    }
-    @Override
-    public void actionPerformed (ActionEvent e) {
-        _app.FinPath();
-    }
-}
-
-class ClearButtonEventListener implements ActionListener {
-    private AppWindow _app;
-
-    public ClearButtonEventListener(AppWindow app) {_app = app;}
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        _app.ClearField();
-    }
-}

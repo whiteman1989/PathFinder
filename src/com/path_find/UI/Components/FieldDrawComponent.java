@@ -1,4 +1,4 @@
-package com.path_find.UI.components;
+package com.path_find.UI.Components;
 
 import com.path_find.entities.Inetrface.Node;
 
@@ -6,8 +6,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
-import java.util.ArrayList;
-import java.util.List;
 
 public class FieldDrawComponent extends JPanel {
     private int _height;
@@ -39,7 +37,7 @@ public class FieldDrawComponent extends JPanel {
         for (int i = 0; i < _height; i++) {
             for (int j = 0; j < _width; j++) {
                 Rectangle2D rectangle = new Rectangle2D.Double(j * _cellSize, i * _cellSize, _cellSize, _cellSize);
-                g2.setPaint(Color.CYAN);
+                g2.setPaint(Color.LIGHT_GRAY);
                 g2.fill(rectangle);
                 if (unPassed[i][j]) {
                     g2.setPaint(Color.black);

@@ -1,4 +1,4 @@
-package com.path_find.UI.components;
+package com.path_find.UI.Components;
 
 import javax.swing.*;
 import java.awt.*;

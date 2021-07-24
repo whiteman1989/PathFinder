@@ -3,6 +3,8 @@ package com.path_find.entities.square;
 import com.path_find.entities.Inetrface.Node;
 import com.path_find.entities.Point2D;
 
+import java.io.*;
+
 public class SquareField {
     private int _height;
     private int _width;
@@ -18,7 +20,42 @@ public class SquareField {
         nodes = new SquareNode[_height][_width];
         FillNodes();
         InitNodes();
+    }
 
+    private void WallMapToNodes(boolean[][] walls) {
+        for (int i = 0; i < _height; i++) {
+            for (int j = 0; j < _width; j++) {
+                nodes[i][j].isWall = walls[i][j];
+            }
+        }
+    }
+
+    public void DeserializeNodes() {
+        try {
+            FileInputStream file = new FileInputStream("nodes.ser");
+            ObjectInputStream in = new ObjectInputStream(file);
+
+            boolean[][] walls;
+            walls = (boolean[][]) in.readObject();
+            in.close();
+            file.close();
+            WallMapToNodes(walls);
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void SerializeNodes(){
+        try {
+            FileOutputStream file = new FileOutputStream("nodes.ser");
+            ObjectOutputStream out = new ObjectOutputStream(file);
+
+            out.writeObject(GetWallMap());
+            out.close();
+            file.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void FillNodes() {
